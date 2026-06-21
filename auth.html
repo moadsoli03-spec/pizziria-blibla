@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizziria Blibla — Connexion / Inscription</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <style>
+    .form-row-between {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Pizziria Blibla">
+        <span class="brand-mark" aria-hidden="true">🍕</span>
+        <span class="brand-text">
+          <span class="brand-name">Pizziria Blibla</span>
+          <span class="brand-tag">Premium Pizza • Food Delivery</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Navigation principale">
+        <a class="nav-link" href="index.html">Accueil</a>
+        <a class="nav-link" href="menu.html">Menu</a>
+        <a class="nav-link" href="about.html">À propos</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+        <a class="nav-link is-active" href="auth.html">Connexion</a>
+        <a class="nav-link nav-link-cart" href="cart.html">
+          Panier <span class="badge badge-pill" id="navCartCount">0</span>
+        </a>
+      </nav>
+
+      <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-nav-toggle>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <section class="page-hero">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <div>
+            <h1 class="page-title">Mon compte</h1>
+            <p class="page-lead">Interface premium avec validation JavaScript (frontend only).</p>
+          </div>
+          <div>
+            <a class="btn btn-ghost" href="menu.html">Explorer le menu</a>
+          </div>
+        </div>
+
+        <div class="auth-wrap">
+          <!-- Auth Panel -->
+          <div class="auth-panel" data-reveal>
+            <div class="auth-header">
+              <div class="auth-emoji">🍕</div>
+              <h2 class="auth-title">Pizziria Blibla</h2>
+              <p class="auth-sub">Connectez-vous ou créez un compte</p>
+            </div>
+
+            <div class="tab-row" role="tablist" aria-label="Choisir une action">
+              <button class="tab-btn is-active" type="button" id="tabLogin" role="tab" aria-selected="true">
+                Connexion
+              </button>
+              <button class="tab-btn" type="button" id="tabRegister" role="tab" aria-selected="false">
+                Inscription
+              </button>
+            </div>
+
+            <!-- Login Form -->
+            <div id="loginPanel" class="login-panel">
+              <form id="loginForm" class="form-grid" novalidate>
+                <div>
+                  <div class="label">Email</div>
+                  <input class="field" id="loginEmail" type="email" placeholder="vous@email.com" required>
+                  <div class="err" id="errLoginEmail">Email invalide.</div>
+                </div>
+
+                <div>
+                  <div class="label">Mot de passe</div>
+                  <input class="field" id="loginPassword" type="password" placeholder="••••••••" required minlength="6">
+                  <div class="err" id="errLoginPassword">Mot de passe requis (min 6 caractères).</div>
+                </div>
+
+                <div class="form-row-between">
+                  <label style="display: flex; align-items: center; gap: var(--space-sm); color: var(--gray-4); font-size: var(--font-size-sm); cursor: pointer;">
+                    <input type="checkbox" style="accent-color: var(--primary);"> Se souvenir de moi
+                  </label>
+                  <a href="#" style="color: var(--primary); font-size: var(--font-size-sm);">Mot de passe oublié ?</a>
+                </div>
+
+                <button class="btn btn-primary btn-lg btn-block" type="submit">
+                  Se connecter
+                  <span class="btn-icon">→</span>
+                </button>
+
+                <div class="inline-help">
+                  En vous connectant, un utilisateur est simulé et stocké dans <b>localStorage</b>.
+                </div>
+              </form>
+            </div>
+
+            <!-- Register Form -->
+            <div id="registerPanel" style="margin-top: var(--space-lg); display: none;">
+              <form id="registerForm" class="form-grid" novalidate>
+                <div>
+                  <div class="label">Nom complet</div>
+                  <input class="field" id="registerName" type="text" placeholder="Votre nom" required minlength="2">
+                  <div class="err" id="errRegisterName">Nom invalide (min 2 caractères).</div>
+                </div>
+
+                <div>
+                  <div class="label">Email</div>
+                  <input class="field" id="registerEmail" type="email" placeholder="vous@email.com" required>
+                  <div class="err" id="errRegisterEmail">Email invalide.</div>
+                </div>
+
+                <div>
+                  <div class="label">Mot de passe</div>
+                  <input class="field" id="registerPassword" type="password" placeholder="••••••••" required minlength="6">
+                  <div class="err" id="errRegisterPassword">Mot de passe requis (min 6 caractères).</div>
+                </div>
+
+                <div>
+                  <div class="label">Confirmer le mot de passe</div>
+                  <input class="field" id="registerPasswordConfirm" type="password" placeholder="••••••••" required>
+                  <div class="err" id="errRegisterPasswordConfirm">Les mots de passe ne correspondent pas.</div>
+                </div>
+
+                <label style="display: flex; align-items: flex-start; gap: var(--space-sm); color: var(--gray-4); font-size: var(--font-size-sm); cursor: pointer; line-height: 1.4;">
+                  <input type="checkbox" required style="accent-color: var(--primary); margin-top: 2px;">
+                  J'accepte les <a href="#" style="color: var(--primary);">conditions d'utilisation</a> et la <a href="#" style="color: var(--primary);">politique de confidentialité</a>
+                </label>
+
+                <button class="btn btn-primary btn-lg btn-block" type="submit">
+                  Créer mon compte
+                  <span class="btn-icon">→</span>
+                </button>
+
+                <div class="inline-help">
+                  Les données sont simulées côté client. Aucun envoi réseau.
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Info Panel -->
+          <aside class="premium-side" data-reveal>
+            <h3>Pourquoi créer un compte ?</h3>
+            <div style="display: flex; flex-direction: column; gap: var(--space-md); margin: var(--space-lg) 0;">
+              <div style="display: flex; align-items: center; gap: var(--space-md);">
+                <span style="font-size: 1.5rem;">⚡</span>
+                <div>
+                  <strong>Commandes rapides</strong>
+                  <p style="margin: 0; font-size: var(--font-size-sm);">Enregistrez vos préférences favorites</p>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-md);">
+                <span style="font-size: 1.5rem;">📍</span>
+                <div>
+                  <strong>Historique</strong>
+                  <p style="margin: 0; font-size: var(--font-size-sm);">Suivez vos anciennes commandes</p>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-md);">
+                <span style="font-size: 1.5rem;">🎁</span>
+                <div>
+                  <strong>Promos exclusives</strong>
+                  <p style="margin: 0; font-size: var(--font-size-sm);">Accès aux offres membres</p>
+                </div>
+              </div>
+            </div>
+
+            <hr class="sep">
+
+            <h3 style="margin-top: var(--space-lg);">Sécurité & confidentialité</h3>
+            <p>
+              Démo frontend : informations uniquement dans <b>localStorage</b>.
+              À but démonstration PFE. Aucune donnée n'est transmise sur internet.
+            </p>
+
+            <div style="margin-top: var(--space-xl); display: flex; gap: var(--space-md); flex-wrap: wrap;">
+              <a class="btn btn-ghost btn-sm" href="cart.html">Voir mon panier</a>
+              <a class="btn btn-primary btn-sm" href="admin.html">Admin UI</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">🍕</span>
+          <div>
+            <div class="footer-title">Pizziria Blibla</div>
+            <div class="footer-sub">Premium pizza • Food delivery moderne</div>
+          </div>
+        </div>
+        <p class="footer-text">
+          Commandez en quelques clics. Pizzas gourmandes préparées avec passion.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">Navigation</div>
+        <div class="footer-links">
+          <a href="index.html">Accueil</a>
+          <a href="menu.html">Menu</a>
+          <a href="about.html">À propos</a>
+          <a href="contact.html">Contact</a>
+          <a href="auth.html">Login/Register</a>
+          <a href="admin.html">Admin Dashboard</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">Contact</div>
+        <div class="footer-links">
+          <span>📍 Casablanca, Maroc</span>
+          <span>☎️ +212 6XX-XX-XX-XX</span>
+          <span>✉️ contact@pizziria-blibla.ma</span>
+        </div>
+        <div class="footer-social">
+          <a class="social-btn" href="#" aria-label="Instagram">IG</a>
+          <a class="social-btn" href="#" aria-label="Facebook">FB</a>
+          <a class="social-btn" href="#" aria-label="TikTok">TT</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>© <span id="year"></span> Pizziria Blibla. Tous droits réservés.</span>
+      <span class="footer-mini">Design premium • Vanilla JS</span>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/scrollReveal.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

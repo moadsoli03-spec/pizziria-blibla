@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizziria Blibla — Admin Dashboard</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/admin-new.css">
+</head>
+
+<body class="admin-body">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">🍕</div>
+      <div class="sidebar-logo-text">
+        <span class="sidebar-logo-name">Pizziria</span>
+        <span class="sidebar-logo-sub">Blibla Admin</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-link active" href="#" data-section="overview">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Vue d'ensemble</span>
+      </a>
+      <a class="sidebar-link" href="#" data-section="orders">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
+        <span>Commandes</span>
+        <span class="sidebar-badge" id="sidebarPendingCount">0</span>
+      </a>
+      <a class="sidebar-link" href="#" data-section="products">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+        <span>Produits</span>
+      </a>
+      <a class="sidebar-link" href="#" data-section="customers">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        <span>Clients</span>
+      </a>
+      <a class="sidebar-link" href="#" data-section="analytics">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span>Analytics</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-stock-alert" id="sidebarStockAlert">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+        <span><strong id="sidebarLowStockCount">0</strong> ruptures de stock</span>
+      </div>
+      <button class="sidebar-logout-btn" id="adminLogoutBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Déconnexion
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Main content -->
+  <div class="main-wrapper">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <button class="topbar-toggle" id="sidebarToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="topbar-title" id="topbarTitle">Vue d'ensemble</div>
+
+      <div class="topbar-actions">
+        <a href="menu.html" class="topbar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          Voir le menu
+        </a>
+        <div class="topbar-admin">
+          <div class="topbar-admin-dot"></div>
+          <span>Admin</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main class="main-content" id="main">
+
+      <!-- ========== OVERVIEW ========== -->
+      <section class="section" id="section-overview">
+        <div class="section-header">
+          <div>
+            <div class="section-tag">Dashboard</div>
+            <h1 class="section-title">Vue d'ensemble</h1>
+            <p class="section-sub">Statistiques en temps réel · LocalStorage</p>
+          </div>
+          <div class="section-actions">
+            <button class="btn btn-ghost" id="mockUpdateBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+              Avancer statuts
+            </button>
+            <button class="btn btn-primary" id="mockSimulateBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Simuler commande
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats cards -->
+        <div class="stats-grid">
+          <div class="stat-card stat-card--primary">
+            <div class="stat-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+            </div>
+            <div class="stat-card-body">
+              <div class="stat-card-label">Total Produits</div>
+              <div class="stat-card-value" id="statTotalProducts">0</div>
+            </div>
+            <div class="stat-card-trend">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg>
+              menu actif
+            </div>
+          </div>
+
+          <div class="stat-card stat-card--accent">
+            <div class="stat-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+            </div>
+            <div class="stat-card-body">
+              <div class="stat-card-label">Total Commandes</div>
+              <div class="stat-card-value" id="statOrders">0</div>
+            </div>
+            <div class="stat-card-trend">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg>
+              toutes périodes
+            </div>
+          </div>
+
+          <div class="stat-card stat-card--green">
+            <div class="stat-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
+            <div class="stat-card-body">
+              <div class="stat-card-label">Chiffre d'affaires</div>
+              <div class="stat-card-value" id="statRevenue">0 DH</div>
+            </div>
+            <div class="stat-card-trend">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg>
+              <span id="statRevenueToday">0 DH</span> aujourd'hui
+            </div>
+          </div>
+
+          <div class="stat-card stat-card--blue">
+            <div class="stat-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            <div class="stat-card-body">
+              <div class="stat-card-label">Clients Actifs</div>
+              <div class="stat-card-value" id="statClients">0</div>
+            </div>
+            <div class="stat-card-trend">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg>
+              clients uniques
+            </div>
+          </div>
+        </div>
+
+        <!-- Secondary widgets -->
+        <div class="widgets-row">
+          <div class="widget-card widget-card--alert">
+            <div class="widget-card-header">
+              <div class="widget-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+                Ruptures de stock
+              </div>
+            </div>
+            <div class="widget-card-value" id="adminLowStockValue">0</div>
+            <div class="widget-card-sub">produits indisponibles dans le menu</div>
+          </div>
+
+          <div class="widget-card widget-card--orders">
+            <div class="widget-card-header">
+              <div class="widget-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                En attente
+              </div>
+            </div>
+            <div class="widget-card-value" id="statPending">0</div>
+            <div class="widget-card-sub">commandes à traiter</div>
+          </div>
+
+          <div class="widget-card widget-card--delivered">
+            <div class="widget-card-header">
+              <div class="widget-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"><polyline points="20 6 9 17 4 12"/></svg>
+                Livrées
+              </div>
+            </div>
+            <div class="widget-card-value" id="statDelivered">0</div>
+            <div class="widget-card-sub">commandes complétées</div>
+          </div>
+
+          <div class="widget-card widget-card--chart">
+            <div class="widget-card-header">
+              <div class="widget-card-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                Graphiques
+              </div>
+              <span class="badge-soon">Bientôt</span>
+            </div>
+            <div class="chart-placeholder">
+              <div class="chart-bar" style="height:40%"></div>
+              <div class="chart-bar" style="height:70%"></div>
+              <div class="chart-bar" style="height:55%"></div>
+              <div class="chart-bar" style="height:90%"></div>
+              <div class="chart-bar" style="height:65%"></div>
+              <div class="chart-bar" style="height:80%"></div>
+              <div class="chart-bar" style="height:45%"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== ORDERS ========== -->
+      <section class="section" id="section-orders" style="display:none">
+        <div class="section-header">
+          <div>
+            <div class="section-tag">Gestion</div>
+            <h1 class="section-title">Commandes</h1>
+            <p class="section-sub">Recherche, filtres, mise à jour statuts</p>
+          </div>
+          <span class="live-badge">
+            <span class="live-dot"></span> Live
+          </span>
+        </div>
+
+        <div class="card">
+          <div class="card-toolbar">
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="search" id="adminOrdersSearch" placeholder="Commande, client, produit...">
+            </div>
+            <select class="filter-select" id="adminOrdersStatus">
+              <option value="all">Tous les statuts</option>
+              <option value="pending">En attente</option>
+              <option value="confirmed">Confirmée</option>
+              <option value="preparing">En préparation</option>
+              <option value="delivered">Livrée</option>
+              <option value="cancelled">Annulée</option>
+            </select>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table" aria-label="Liste des commandes">
+              <thead>
+                <tr>
+                  <th>Commande</th>
+                  <th>Articles</th>
+                  <th>Total</th>
+                  <th>Statut</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTbody">
+                <tr class="empty-row">
+                  <td colspan="6">
+                    <div class="empty-state">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+                      <span>Aucune commande trouvée</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-hint">Modifiez le statut via la liste déroulante — sauvegarde automatique localStorage.</div>
+        </div>
+      </section>
+
+      <!-- ========== PRODUCTS ========== -->
+      <section class="section" id="section-products" style="display:none">
+        <div class="section-header">
+          <div>
+            <div class="section-tag">CRUD</div>
+            <h1 class="section-title">Produits</h1>
+            <p class="section-sub">Ajout, modification, suppression · localStorage</p>
+          </div>
+          <div class="section-actions">
+            <button class="btn btn-ghost" id="menuResetBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+              Reset menu
+            </button>
+            <button class="btn btn-primary" id="menuAddBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Ajouter produit
+            </button>
+          </div>
+        </div>
+
+        <div class="products-layout">
+          <!-- Form panel -->
+          <div class="card form-card">
+            <div class="form-card-header">
+              <h3 class="form-card-title" id="adminFormModeLabel">Ajouter un produit</h3>
+              <p class="form-card-sub">Tous les champs marqués * sont requis</p>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Nom <span class="req">*</span></label>
+                <input class="form-input" id="adminProductName" type="text" placeholder="Ex: Diablo">
+                <div class="form-error" id="adminProductNameError">Nom requis</div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Prix (DH) <span class="req">*</span></label>
+                <input class="form-input" id="adminProductPrice" type="number" min="0" step="0.01" placeholder="Ex: 90">
+                <div class="form-error" id="adminProductPriceError">Prix invalide</div>
+              </div>
+
+              <div class="form-group form-group--full">
+                <label class="form-label">Description <span class="req">*</span></label>
+                <textarea class="form-input form-textarea" id="adminProductDescription" rows="3" placeholder="Décrivez le produit..."></textarea>
+                <div class="form-error" id="adminProductDescriptionError">Description requise</div>
+              </div>
+
+              <div class="form-group form-group--full">
+                <label class="form-label">Image URL <span class="req">*</span></label>
+                <input class="form-input" id="adminProductImage" type="url" placeholder="https://...">
+                <div class="form-error" id="adminProductImageError">Image requise</div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Catégorie <span class="req">*</span></label>
+                <select class="form-input form-select" id="adminProductCategory"></select>
+                <div class="form-error" id="adminProductCategoryError">Catégorie requise</div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Badge</label>
+                <select class="form-input form-select" id="adminProductBadge">
+                  <option value="">— Aucun —</option>
+                  <option value="Best Seller">Best Seller</option>
+                  <option value="Hot">Hot</option>
+                  <option value="New">New</option>
+                  <option value="Promo">Promo</option>
+                </select>
+              </div>
+
+              <div class="form-group form-group--toggle">
+                <label class="form-label">Disponibilité</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="adminProductAvailable" checked>
+                  <span class="toggle-track">
+                    <span class="toggle-thumb"></span>
+                  </span>
+                  <span class="toggle-label" id="availableLabel">Actif</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn-primary btn-full" id="adminProductSubmitBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><polyline points="20 6 9 17 4 12"/></svg>
+                Ajouter le produit
+              </button>
+              <button class="btn btn-ghost" id="adminProductCancelEditBtn" style="display:none;">
+                Annuler l'édition
+              </button>
+            </div>
+          </div>
+
+          <!-- List panel -->
+          <div class="card list-card">
+            <div class="card-toolbar">
+              <div class="search-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="search" id="adminMenuSearch" placeholder="Rechercher un produit...">
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table class="data-table" aria-label="Gestion des produits">
+                <thead>
+                  <tr>
+                    <th>Produit</th>
+                    <th>Catégorie</th>
+                    <th>Prix</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="menuTbody">
+                  <tr class="empty-row">
+                    <td colspan="4">
+                      <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+                        <span>Aucun produit trouvé</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card-hint">Cliquez sur <strong>Modifier</strong> pour éditer, <strong>Supprimer</strong> pour retirer du menu.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== CUSTOMERS ========== -->
+      <section class="section" id="section-customers" style="display:none">
+        <div class="section-header">
+          <div>
+            <div class="section-tag">CRM</div>
+            <h1 class="section-title">Clients</h1>
+            <p class="section-sub">Clients actifs et statistiques du jour</p>
+          </div>
+          <span class="live-badge">
+            <span class="live-dot"></span> Live Stats
+          </span>
+        </div>
+
+        <div class="stats-grid stats-grid--2">
+          <div class="stat-card stat-card--blue">
+            <div class="stat-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            <div class="stat-card-body">
+              <div class="stat-card-label">Clients Actifs</div>
+              <div class="stat-card-value customer-stat-clients">0</div>
+            </div>
+            <div class="stat-card-trend">Emails uniques enregistrés</div>
+          </div>
+
+          <div class="stat-card stat-card--green">
+            <div class="stat-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
+            <div class="stat-card-body">
+              <div class="stat-card-label">Revenus Aujourd'hui</div>
+              <div class="stat-card-value customer-stat-revenue-today">0 DH</div>
+            </div>
+            <div class="stat-card-trend">Commandes passées aujourd'hui</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== ANALYTICS ========== -->
+      <section class="section" id="section-analytics" style="display:none">
+        <div class="section-header">
+          <div>
+            <div class="section-tag">Insights</div>
+            <h1 class="section-title">Analytics</h1>
+            <p class="section-sub">Visualisations et tendances de vente</p>
+          </div>
+        </div>
+
+        <div class="card analytics-card">
+          <div class="analytics-tags">
+            <span class="atag atag--red">Revenue</span>
+            <span class="atag atag--orange">Commandes</span>
+            <span class="atag atag--green">Livraisons</span>
+          </div>
+          <div class="analytics-chart-area">
+            <div class="analytics-soon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <div class="analytics-soon-title">Graphiques bientôt disponibles</div>
+              <div class="analytics-soon-sub">Connexion backend requise pour les données temps réel</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="adminToastContainer" aria-live="polite"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/admin-new.js"></script>
+</body>
+</html>

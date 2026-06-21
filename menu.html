@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizziria Blibla — Menu</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/menu.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Pizziria Blibla">
+        <span class="brand-mark" aria-hidden="true">🍕</span>
+        <span class="brand-text">
+          <span class="brand-name">Pizziria Blibla</span>
+          <span class="brand-tag">Premium Pizza • Food Delivery</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Navigation principale">
+        <a class="nav-link" href="index.html">Accueil</a>
+        <a class="nav-link is-active" href="menu.html">Menu</a>
+        <a class="nav-link" href="about.html">À propos</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+        <a class="nav-link" href="auth.html">Connexion</a>
+        <a class="nav-link nav-link-cart" href="cart.html">
+          Panier <span class="badge badge-pill" id="navCartCount">0</span>
+        </a>
+      </nav>
+
+      <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-nav-toggle>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="page menu">
+    <section class="menu-hero">
+      <div class="container">
+        <div class="menu-hero-grid">
+          <div>
+            <div class="hero-brand-pill" data-reveal>
+
+              <div class="hero-brand-mark" aria-hidden="true">🍕</div>
+              <div class="hero-brand-text">
+                <div class="hero-sup">Premium Pizza • Food Delivery</div>
+                <div style="font-weight: 950; color: var(--white); font-size: var(--font-size-base);">Pizziria Blibla</div>
+              </div>
+            </div>
+
+            <h1 class="hero-title" data-reveal>
+              Découvrez des <span class="grad">saveurs</span> qui donnent envie.
+            </h1>
+            <p class="hero-sub" data-reveal>
+              Recherchez, filtrez, et ajoutez au panier en un clic — prix en DH. Rapide, clair, premium.
+            </p>
+
+            <div class="hero-cta-row" data-reveal>
+              <a class="btn btn-primary btn-lg" href="#menuGrid">Voir le menu</a>
+              <a class="btn btn-secondary btn-lg" href="cart.html">Aller au panier</a>
+            </div>
+
+            <!-- Toolbar (keep IDs for JS) -->
+            <div class="toolbar" data-reveal>
+              <div class="search">
+                <span class="hint" aria-hidden="true">🔎</span>
+                <input id="menuSearch" type="search" placeholder="Rechercher une pizza, un dessert, une boisson..." />
+              </div>
+
+              <select id="menuCategory" class="select field" aria-label="Filtrer par catégorie">
+                <option value="all">Toutes les catégories</option>
+              </select>
+
+              <select id="menuBadge" class="select field" aria-label="Filtrer par badge">
+                <option value="all">Tous badges</option>
+                <option value="Best Seller">Best Seller</option>
+                <option value="Hot">Hot</option>
+                <option value="New">New</option>
+              </select>
+            </div>
+
+        <!-- Results count (moved into the hero area) -->
+            <div class="menu-results-bar" data-reveal>
+              <div class="pill">
+                <span id="resultsCount">30</span>
+                <span>produits disponibles</span>
+              </div>
+            </div>
+
+            <!-- Premium category pills (visual only) -->
+            <div class="category-pills" data-reveal aria-label="Navigation rapide catégories">
+              <span class="category-pill">🍕 Pizzas</span>
+              <span class="category-pill">🍔 Burgers</span>
+              <span class="category-pill">🍟 Snacks</span>
+              <span class="category-pill">🥗 Salades</span>
+              <span class="category-pill">🍰 Desserts</span>
+              <span class="category-pill">🥤 Boissons</span>
+            </div>
+          </div>
+
+          </div>
+
+          <aside class="hero-cta-card" data-reveal>
+            <div class="hero-offer">
+
+            <div class="hero-offer">
+              <h3>Offres & recommandations</h3>
+              <p>
+                Une sélection pensée pour convertir — best-sellers, combos et coups de cœur.
+              </p>
+              <div class="offer-list">
+                <div class="offer-item"><span class="offer-dot" aria-hidden="true"></span> Livraison rapide</div>
+                <div class="offer-item"><span class="offer-dot" aria-hidden="true"></span> Promotions exclusives</div>
+                <div class="offer-item"><span class="offer-dot" aria-hidden="true"></span> Favoris enregistrés</div>
+              </div>
+              <div style="margin-top: var(--space-lg); display:flex; gap: var(--space-md); flex-wrap:wrap; justify-content:flex-start;">
+                <a class="btn btn-ghost btn-lg" href="#menuSuggestions">Recommandés</a>
+                <a class="btn btn-accent btn-lg" href="#menuGrid">Populaires</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+
+        
+
+
+
+
+
+        <!-- Featured storefront sections (Popular / Best Sellers / Recommended) -->
+
+        <div class="featured-sections" style="margin-top: var(--space-2xl);">
+          <!-- Popular -->
+          <div class="featured-block" id="featuredPopular" data-reveal>
+            <div class="section-head" style="margin-bottom: var(--space-lg);">
+              <h2 style="margin: 0; font-size: var(--font-size-2xl);">Populaires</h2>
+              <p style="margin: 0; color: var(--gray-3); font-size: var(--font-size-sm);">Les plus demandés</p>
+            </div>
+            <div id="popularGrid" class="grid grid-3"></div>
+          </div>
+
+          <!-- Best Sellers -->
+          <div class="featured-block" id="featuredBestSellers" data-reveal style="margin-top: var(--space-4xl);">
+            <div class="section-head" style="margin-bottom: var(--space-lg);">
+              <h2 style="margin: 0; font-size: var(--font-size-2xl);">Best Sellers</h2>
+              <p style="margin: 0; color: var(--gray-3); font-size: var(--font-size-sm);">Nos incontournables</p>
+            </div>
+            <div id="bestSellersGrid" class="grid grid-3"></div>
+          </div>
+
+          <!-- Recommended -->
+          <div class="featured-block" id="featuredRecommended" data-reveal style="margin-top: var(--space-4xl);">
+            <div class="section-head" style="margin-bottom: var(--space-lg);">
+              <h2 style="margin: 0; font-size: var(--font-size-2xl);">Recommandés</h2>
+              <p style="margin: 0; color: var(--gray-3); font-size: var(--font-size-sm);">Faits pour vous</p>
+            </div>
+            <div id="recommendedGrid" class="grid grid-3"></div>
+          </div>
+        </div>
+
+
+
+        <!-- Grid -->
+        <div class="menu-section" aria-label="Produits">
+          <div class="menu-section-head" data-reveal>
+            <div>
+              <h2 style="margin: 0;">Notre sélection</h2>
+              <p style="margin: var(--space-xs) 0 0;">Cliquez sur « Ajouter » pour un achat instantané.</p>
+            </div>
+          </div>
+
+          <div id="menuGrid" class="grid grid-3">
+            <!-- Injected by js/menu.js -->
+          </div>
+
+
+        <!-- Empty state -->
+        <div id="menuEmpty" class="empty-state" style="display:none" data-reveal>
+          <div class="empty-state-icon">🔍</div>
+          <div class="empty-state-title">Aucun produit trouvé</div>
+          <p class="empty-state-text">
+            Essayez une autre recherche ou supprimez vos filtres.
+          </p>
+          <button class="btn btn-primary" onclick="clearFilters()">Réinitialiser les filtres</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">🍕</span>
+          <div>
+            <div class="footer-title">Pizziria Blibla</div>
+            <div class="footer-sub">Premium pizza • Food delivery moderne</div>
+          </div>
+        </div>
+        <p class="footer-text">
+          Commandez en quelques clics. Pizzas gourmandes préparées avec passion.
+        </p>
+        <div class="footer-social">
+          <a class="social-btn" href="#" aria-label="Instagram">IG</a>
+          <a class="social-btn" href="#" aria-label="Facebook">FB</a>
+          <a class="social-btn" href="#" aria-label="TikTok">TT</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">Navigation</div>
+        <div class="footer-links">
+          <a href="index.html">Accueil</a>
+          <a href="menu.html">Menu</a>
+          <a href="about.html">À propos</a>
+          <a href="contact.html">Contact</a>
+          <a href="auth.html">Login/Register</a>
+          <a href="admin.html">Admin Dashboard</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">Contact</div>
+        <div class="footer-links">
+          <span>📍 Casablanca, Maroc</span>
+          <span>☎️ +212 6XX-XX-XX-XX</span>
+          <span>✉️ contact@pizziria-blibla.ma</span>
+        </div>
+        <div style="margin-top: var(--space-md);">
+          <div class="footer-title" style="font-size: var(--font-size-sm);">Horaires</div>
+          <p class="footer-text" style="margin-top: var(--space-xs);">
+            Lun–Dim : 11h30 — 23h30
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>© <span id="year"></span> Pizziria Blibla. Tous droits réservés.</span>
+      <span class="footer-mini">Design premium • Vanilla JS</span>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/scrollReveal.js"></script>
+  <script src="js/menu.js"></script>
+
+  <script>
+
+    // Suggestions premium injectées après chargement menu
+    (function() {
+      try {
+        if (!window.STORAGE) return;
+        const grid = document.getElementById('suggestionsGrid');
+        if (!grid) return;
+
+        const products = window.STORAGE?.getMenuProductsOrDefault
+          ? window.STORAGE.getMenuProductsOrDefault()
+          : (window.PIZZIRIA_DATA?.products || []);
+
+        const favorites = window.STORAGE.getFavorites ? window.STORAGE.getFavorites() : [];
+
+        // fallback best-sellers (si dispo)
+        const fallback = (window.PIZZIRIA_DATA?.products || []).filter(p => p.badge === 'Best Seller');
+
+        const pickFromFavorites = favorites
+          .map(id => products.find(p => String(p.id) === String(id)))
+          .filter(Boolean);
+
+        const candidates = (pickFromFavorites.length ? pickFromFavorites : fallback).slice(0, 6);
+
+        if (!candidates.length) {
+          grid.style.display = 'none';
+          return;
+        }
+
+        grid.innerHTML = candidates.map(p => `
+          <article class="product-card" data-product-id="${p.id}">
+            <div class="product-image-wrap">
+              ${p.badge ? `<div class="product-badge"><span class="badge badge-promo">${p.badge}</span></div>` : ''}
+              <img class="product-image" src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='${getPlaceholderImage(p.category)}'" />
+              <div class="product-image-overlay"></div>
+            </div>
+            <div class="product-content">
+              <span class="product-category">${p.category}</span>
+              <h3 class="product-name">${p.name}</h3>
+              <p class="product-description">${p.description}</p>
+              <div class="product-footer">
+                <div class="product-price">${p.price}<span class="product-price-unit">DH</span></div>
+                <button class="btn-add-cart" data-product-id="${p.id}">
+                  <span class="cart-icon">🛒</span> Ajouter
+                </button>
+              </div>
+            </div>
+          </article>
+        `).join('');
+
+        // IMPORTANT:
+        // This page is presentation-only. Click handling is delegated in js/menu.js.
+        // We only render product cards with the correct markup.
+      } catch (e) {
+        console.warn('Suggestions menu error:', e);
+      }
+    })();
+
+
+    function clearFilters() {
+      const search = document.getElementById('menuSearch');
+      const category = document.getElementById('menuCategory');
+      const badge = document.getElementById('menuBadge');
+
+      if (search) search.value = '';
+      if (category) category.value = 'all';
+      if (badge) badge.value = 'all';
+
+      if (typeof window.renderMenu === 'function') {
+        window.currentFilters = { search: '', category: 'all', badge: 'all' };
+        window.renderMenu();
+      }
+    }
+  </script>
+</body>
+</html>

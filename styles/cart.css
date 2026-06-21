@@ -1,0 +1,214 @@
+/* ===========================================
+   PIZZIRIA BLIBLA - CART UI (Scoped)
+   Modern e-commerce layout for cart rows
+   =========================================== */
+
+/* Scope strictly to cart page markup */
+main.page .cart-list,
+#cartList.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Cart list container */
+#cartList {
+  width: 100%;
+}
+
+/* Prevent layout shifts when images fail and placeholders load */
+.cart-item-image {
+  display: flex;
+}
+
+
+/* Single cart item row */
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+
+  padding: var(--space-lg);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+
+  box-shadow: 0 10px 34px rgba(0,0,0,0.25);
+}
+
+.cart-item-image {
+  flex: 0 0 86px;
+  width: 86px;
+  height: 68px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.cart-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cart-item-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.cart-item-name {
+  color: var(--white);
+  font-weight: 900;
+  font-size: var(--font-size-lg);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cart-item-price {
+  color: rgba(255,255,255,0.78);
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+}
+
+.cart-item-price::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 10px;
+  background: var(--accent);
+  box-shadow: 0 0 22px rgba(255,159,28,0.35);
+  transform: translateY(-1px);
+}
+
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.quantity-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: var(--radius-xl);
+  padding: 6px 10px;
+}
+
+.quantity-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.03);
+  color: rgba(255,255,255,0.92);
+  font-weight: 900;
+  font-size: 1.15rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+
+.quantity-btn:hover {
+  border-color: rgba(230,57,70,0.45);
+  box-shadow: 0 0 0 4px rgba(230,57,70,0.10);
+  transform: translateY(-1px);
+}
+
+.quantity-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.quantity-value {
+  min-width: 28px;
+  text-align: center;
+  color: var(--white);
+  font-weight: 900;
+}
+
+.cart-item-remove {
+  padding: 10px 14px;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(239,68,68,0.32);
+  background: rgba(239,68,68,0.10);
+  color: rgba(255,255,255,0.92);
+  font-weight: 900;
+  transition: var(--transition-fast);
+}
+
+.cart-item-remove:hover {
+  transform: translateY(-1px);
+  background: rgba(239,68,68,0.16);
+  border-color: rgba(239,68,68,0.52);
+  box-shadow: 0 0 0 4px rgba(239,68,68,0.10);
+}
+
+.cart-item-total {
+  flex: 0 0 auto;
+  color: var(--white);
+  font-weight: 950;
+  font-size: var(--font-size-xl);
+  background: var(--gradient-text-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cart-item {
+    padding: var(--space-md);
+    gap: var(--space-md);
+    align-items: flex-start;
+  }
+
+  .cart-item-image {
+    flex-basis: 76px;
+    width: 76px;
+    height: 62px;
+  }
+
+  .cart-item-total {
+    font-size: 1.15rem;
+  }
+
+  .cart-item-controls {
+    gap: var(--space-md);
+  }
+}
+
+/* Better print consistency (optional) */
+@media print {
+  .cart-item {
+    border: 1px solid #ddd;
+    background: white !important;
+    color: black !important;
+  }
+  .cart-item-name,
+  .cart-item-total {
+    -webkit-text-fill-color: initial !important;
+    background: none !important;
+    color: black !important;
+  }
+}
+

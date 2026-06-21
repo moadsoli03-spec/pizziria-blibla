@@ -1,0 +1,52 @@
+/* Admin layout fix: ensure sections are never clipped/half-visible.
+   Scoped to admin page only.
+*/
+
+#main.admin-main{
+  width: 100%;
+  overflow: visible;
+  padding-bottom: var(--space-4xl);
+}
+
+/* Prevent anchor jumps from hiding content behind fixed topbar */
+.admin-section{
+  scroll-margin-top: calc(var(--admin-topbar-h) + 16px);
+}
+
+/* Ensure the main scrolling area is the page, not nested elements */
+.admin-container{
+  min-height: calc(100vh - var(--admin-topbar-h));
+}
+
+/* If sticky table header is used, avoid clipping */
+.admin-table-scroll{
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+/* Reduce risk of footer covering content */
+.site-footer{
+  margin-top: 0;
+}
+
+/* Revisit bug mitigation:
+   when switching sections, browsers may preserve scroll/painting state.
+   Force a clean reflow for section roots.
+*/
+.admin-section{
+  contain: layout paint;
+}
+
+/* Ensure container itself doesn't get clipped during revisits */
+#adminContainer{
+  overflow: visible;
+}
+
+
+@media (max-width: 900px){
+  .admin-main{
+    padding-top: calc(var(--admin-topbar-h) + 12px);
+  }
+}
+
+

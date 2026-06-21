@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizziria Blibla — Contact</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/components.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Pizziria Blibla">
+        <span class="brand-mark" aria-hidden="true">🍕</span>
+        <span class="brand-text">
+          <span class="brand-name">Pizziria Blibla</span>
+          <span class="brand-tag">Premium Pizza • Food Delivery</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Navigation principale">
+        <a class="nav-link" href="index.html">Accueil</a>
+        <a class="nav-link" href="menu.html">Menu</a>
+        <a class="nav-link" href="about.html">À propos</a>
+        <a class="nav-link is-active" href="contact.html">Contact</a>
+        <a class="nav-link" href="auth.html">Connexion</a>
+        <a class="nav-link nav-link-cart" href="cart.html">
+          Panier <span class="badge badge-pill" id="navCartCount">0</span>
+        </a>
+      </nav>
+
+      <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-nav-toggle>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <section class="page-hero">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <div>
+            <h1 class="page-title">Contact</h1>
+            <p class="page-lead">Une question, une demande spéciale, ou juste dire bonjour — on est là.</p>
+          </div>
+          <div>
+            <a class="btn btn-ghost" href="menu.html">Voir le menu</a>
+          </div>
+        </div>
+
+        <div class="split">
+          <!-- Form -->
+          <section class="card premium-side" style="padding: var(--space-2xl);" data-reveal>
+            <h2 style="font-size: var(--font-size-2xl); margin:0 0 var(--space-sm);">Écrivez-nous</h2>
+            <p class="section-subtitle" style="margin-bottom: var(--space-xl);">Réponse rapide garantie ✨</p>
+
+            <form id="contactForm" class="form-grid" action="https://formspree.io/f/xkoaowvp" method="POST">
+              <input type="hidden" name="_subject" value="Nouveau message depuis le formulaire de contact" />
+              <input type="hidden" name="_language" value="fr" />
+              <input type="text" name="_gotcha" style="display:none" autocomplete="off" />
+
+              <div class="form-row" style="grid-template-columns: 1fr 1fr;">
+                <div>
+                  <div class="label">Nom complet</div>
+                  <input class="field" id="contactName" name="name" type="text" placeholder="Votre nom" required>
+                </div>
+                <div>
+                  <div class="label">Téléphone</div>
+                  <input class="field" id="contactPhone" name="phone" type="tel" placeholder="+212 6XX-XX-XX-XX" required>
+                </div>
+              </div>
+
+              <div>
+                <div class="label">Email</div>
+                <input class="field" id="contactEmail" name="email" type="email" placeholder="vous@email.com" required>
+              </div>
+
+              <div>
+                <label class="label" for="contactSubject">Sujet</label>
+                <select class="field select" id="contactSubject" name="subject" required>
+                  <option value="">Choisir un sujet...</option>
+                  <option value="commande">Question sur une commande</option>
+                  <option value="livreur">Problème de livraison</option>
+                  <option value="produit">Question sur un produit</option>
+                  <option value="partenariat">Partenariat / Presse</option>
+                  <option value="autre">Autre</option>
+                </select>
+              </div>
+
+              <div>
+                <div class="label">Message</div>
+                <textarea class="field" id="contactMessage" name="message" rows="5" placeholder="Votre message..." required></textarea>
+              </div>
+
+              <button class="btn btn-primary btn-lg" type="submit">
+                Envoyer le message
+                <span class="btn-icon">→</span>
+              </button>
+
+              <div class="note" style="text-align: center;">
+                📧 Formulaire envoyé via Formspree.
+              </div>
+            </form>
+          </section>
+
+          <!-- Info -->
+          <aside data-reveal>
+            <div class="premium-side" style="margin-bottom: var(--space-lg);">
+              <h3 style="margin-bottom: var(--space-md);">📍 Nous trouver</h3>
+              <p>
+                Casablanca, Maroc<br>
+                Zone de livraison : Casa & environs
+              </p>
+              <div style="margin-top: var(--space-lg);">
+                <h4 style="font-size: var(--font-size-sm); color: var(--gray-4); margin-bottom: var(--space-sm);">Horaires d'ouverture</h4>
+                <div style="font-size: var(--font-size-sm); color: var(--gray-5);">
+                  <div style="display: flex; justify-content: space-between;">
+                    <span>Lundi – Vendredi</span>
+                    <span>11h30 – 23h30</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <span>Samedi – Dimanche</span>
+                    <span>12h00 – 00h00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="premium-side" style="margin-bottom: var(--space-lg);">
+              <h3 style="margin-bottom: var(--space-md);">☎️ Contact direct</h3>
+              <p>
+                <strong>Téléphone :</strong><br>
+                +212 6XX-XX-XX-XX<br><br>
+                <strong>Email :</strong><br>
+                contact@pizziria-blibla.ma
+              </p>
+            </div>
+
+            <div class="premium-side">
+              <h3 style="margin-bottom: var(--space-md);">🌐 Réseaux sociaux</h3>
+              <p style="margin-bottom: var(--space-lg);">
+                Suivez-nous pour les nouveautés, promotions et photos alléchantes !
+              </p>
+              <div class="footer-social">
+                <a class="social-btn" href="#" aria-label="Instagram" style="width: 56px; height: 56px; font-size: var(--font-size-lg);">
+                  IG
+                </a>
+                <a class="social-btn" href="#" aria-label="Facebook" style="width: 56px; height: 56px; font-size: var(--font-size-lg);">
+                  FB
+                </a>
+                <a class="social-btn" href="#" aria-label="TikTok" style="width: 56px; height: 56px; font-size: var(--font-size-lg);">
+                  TT
+                </a>
+                <a class="social-btn" href="#" aria-label="WhatsApp" style="width: 56px; height: 56px; font-size: var(--font-size-lg);">
+                  WA
+                </a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">🍕</span>
+          <div>
+            <div class="footer-title">Pizziria Blibla</div>
+            <div class="footer-sub">Premium pizza • Food delivery moderne</div>
+          </div>
+        </div>
+        <p class="footer-text">
+          Commandez en quelques clics. Pizzas gourmandes préparées avec passion.
+        </p>
+        <div class="footer-social">
+          <a class="social-btn" href="#" aria-label="Instagram">IG</a>
+          <a class="social-btn" href="#" aria-label="Facebook">FB</a>
+          <a class="social-btn" href="#" aria-label="TikTok">TT</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">Navigation</div>
+        <div class="footer-links">
+          <a href="index.html">Accueil</a>
+          <a href="menu.html">Menu</a>
+          <a href="about.html">À propos</a>
+          <a href="contact.html">Contact</a>
+          <a href="auth.html">Login/Register</a>
+          <a href="admin.html">Admin Dashboard</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">Contact</div>
+        <div class="footer-links">
+          <span>📍 Casablanca, Maroc</span>
+          <span>☎️ +212 6XX-XX-XX-XX</span>
+          <span>✉️ contact@pizziria-blibla.ma</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>© <span id="year"></span> Pizziria Blibla. Tous droits réservés.</span>
+      <span class="footer-mini">Design premium • Vanilla JS</span>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/scrollReveal.js"></script>
+</body>
+</html>

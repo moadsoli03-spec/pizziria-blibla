@@ -1,0 +1,213 @@
+/* Admin-only styles isolation layer
+   Intentionally scoped under .admin-* and #main.admin-main
+   to prevent any bleed into public pages.
+*/
+
+/* Sticky table headers (orders + products) */
+#main.admin-main .admin-table-scroll thead th,
+#main.admin-main .admin-table-scroll thead tr th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: rgba(24, 24, 27, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Premium table header underline */
+#main.admin-main .admin-table-scroll thead th {
+  box-shadow: 0 1px 0 rgba(230, 57, 70, 0.08);
+}
+
+/* Order status badges */
+#main.admin-main .order-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#main.admin-main .order-status-pending {
+  color: #ff9f1c;
+  background: rgba(255, 159, 28, 0.12);
+  border-color: rgba(255, 159, 28, 0.26);
+}
+
+#main.admin-main .order-status-confirmed {
+  color: #e88a00;
+  background: rgba(232, 138, 0, 0.12);
+  border-color: rgba(232, 138, 0, 0.26);
+}
+
+#main.admin-main .order-status-preparing {
+  color: #64b5f6;
+  background: rgba(100, 181, 246, 0.12);
+  border-color: rgba(100, 181, 246, 0.24);
+}
+
+#main.admin-main .order-status-delivered {
+  color: #00cc88;
+  background: rgba(0, 204, 136, 0.12);
+  border-color: rgba(0, 204, 136, 0.26);
+}
+
+#main.admin-main .order-status-cancelled {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.26);
+}
+
+/* Table rows hover */
+#main.admin-main .admin-table-scroll tbody tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Improve order status select appearance without touching logic */
+#main.admin-main select.order-status-select {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+#main.admin-main select.order-status-select:focus {
+  outline: none;
+  border-color: rgba(230, 57, 70, 0.6);
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.18);
+}
+
+/* Toast placement tweaks while keeping JS intact */
+#main.admin-main #adminToastContainer.toast-container {
+  bottom: calc(var(--space-xl) + 10px);
+  right: var(--space-xl);
+}
+
+#main.admin-main .toast {
+  border-radius: 16px;
+}
+
+.admin-scale-frame {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.admin-scale-content {
+  width: 1600px;
+  height: 900px;
+  transform-origin: top center;
+  transform: scale(min(1, calc(100vw / 1600), calc(100vh / 900)));
+}
+
+#main.admin-main {
+  /* Make room for the fixed left sidebar so content is never hidden */
+  margin-left: calc(var(--admin-sidebar-w) + 24px);
+  width: calc(1600px - var(--admin-sidebar-w) - 24px);
+  height: 900px;
+  overflow: hidden;
+}
+
+/* Overview hero bubble */
+.overview-hero {
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: var(--space-lg);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+  margin-bottom: var(--space-lg);
+}
+
+.overview-hero-inner { display:flex; align-items:center; justify-content:space-between; }
+.overview-hero-metrics { display:flex; gap:var(--space-lg); width:100%; }
+.overview-metric { flex:1; text-align:left; padding: var(--space-md); border-radius: 12px; background: rgba(255,255,255,0.02); }
+.overview-metric-label { color: var(--gray-3); font-weight:700; margin-bottom:6px; }
+.overview-metric-value { font-size: 1.6rem; font-weight:900; color: var(--white); }
+
+/* Admin section reveal behavior */
+#main.admin-main .admin-section {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.24s ease;
+}
+
+#main.admin-main .admin-section.active {
+  display: block;
+  opacity: 1;
+}
+
+#main.admin-main .admin-nav-link.is-active {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Mobile: make sidebar behave like a slide-over */
+@media (max-width: 900px) {
+  :root { --admin-sidebar-w: 260px; }
+
+  #main.admin-main {
+    margin-left: 0;
+  }
+
+  .admin-sidebar {
+    left: 0;
+    transform: translateX(-105%);
+  }
+
+  .admin-sidebar.is-open {
+    transform: translateX(0);
+  }
+}
+
+/* Hide dashboard until the user hovers the frame; reveal on hover/focus */
+.admin-scale-content {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px) scale(0.995);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.admin-scale-frame:hover .admin-scale-content,
+.admin-scale-frame:focus-within .admin-scale-content {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+/* When revealed, center the dashboard data using flexbox */
+#main.admin-main .admin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-lg);
+  box-sizing: border-box;
+}
+
+/* Make primary cards and hero expand to the container width */
+.overview-hero,
+.admin-card,
+.admin-widgets,
+.admin-grid-2,
+.admin-chart-card,
+.admin-alert-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* On reveal, allow main area to center (override left margin) */
+.admin-scale-frame:hover #main.admin-main,
+.admin-scale-frame:focus-within #main.admin-main {
+  margin-left: 0;
+  width: 100%;
+}
+

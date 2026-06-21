@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizziria Blibla — À propos</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/components.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Pizziria Blibla">
+        <span class="brand-mark" aria-hidden="true">🍕</span>
+        <span class="brand-text">
+          <span class="brand-name">Pizziria Blibla</span>
+          <span class="brand-tag">Premium Pizza • Food Delivery</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Navigation principale">
+        <a class="nav-link" href="index.html">Accueil</a>
+        <a class="nav-link" href="menu.html">Menu</a>
+        <a class="nav-link is-active" href="about.html">À propos</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+        <a class="nav-link" href="auth.html">Connexion</a>
+        <a class="nav-link nav-link-cart" href="cart.html">
+          Panier <span class="badge badge-pill" id="navCartCount">0</span>
+        </a>
+      </nav>
+
+      <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-nav-toggle>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <section class="page-hero">
+      <div class="container">
+        <!-- Hero -->
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: var(--space-3xl); align-items: center; margin-bottom: var(--space-4xl);" data-reveal>
+          <div>
+            <div class="pill" style="margin-bottom: var(--space-lg);">
+              <span class="pill-dot"></span>
+              Notre histoire
+            </div>
+            <h1 class="page-title" style="font-size: var(--font-size-4xl);">
+              Une passion <span class="text-gradient">familiale</span> transformée en expérience premium.
+            </h1>
+            <p class="page-lead" style="margin-top: var(--space-lg);">
+              Pizziria Blibla est né d'une passion pour la cuisine italienne authentique.
+              Notre mission : offrir des pizzas et plats préparés avec les meilleurs ingrédients,
+              livrés avec professionnalisme et passion.
+            </p>
+            <div style="margin-top: var(--space-xl);">
+              <a class="btn btn-primary btn-lg" href="menu.html">
+                Découvrir le menu
+                <span class="btn-icon">→</span>
+              </a>
+            </div>
+          </div>
+          <div>
+            <div class="hero-image-wrap">
+              <img
+                class="hero-image"
+                src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&h=450&fit=crop"
+                alt="Pizza artisanale premium"
+                loading="lazy"
+                style="height: 400px;"
+              />
+              <div class="hero-image-overlay"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features grid -->
+        <section class="section" style="padding-top: 0;">
+          <div class="section-head" data-reveal>
+            <h2 class="section-title">Nos valeurs</h2>
+            <p class="section-subtitle">Qualité, exigence, transparence — et un service qui respecte votre faim.</p>
+          </div>
+
+          <div class="grid grid-4" data-reveal>
+            <article class="feature-card">
+              <div class="feature-icon">🏆</div>
+              <h3 class="feature-title">Premium</h3>
+              <p class="feature-text">Une expérience digne d'une marque food delivery moderne.</p>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-icon">🌿</div>
+              <h3 class="feature-title">Frais</h3>
+              <p class="feature-text">Des ingrédients rigoureusement sélectionnés pour un goût authentique.</p>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-icon">⚡</div>
+              <h3 class="feature-title">Rapide</h3>
+              <p class="feature-text">Commande simple, préparation soignée, livraison efficace.</p>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-icon">🤝</div>
+              <h3 class="feature-title">Pro</h3>
+              <p class="feature-text">Une équipe attentive et un service de qualité à chaque commande.</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- Story section -->
+        <section class="section">
+          <div class="grid" style="grid-template-columns: 1fr 1fr; gap: var(--space-3xl);" data-reveal>
+            <div class="premium-side" style="padding: var(--space-2xl);">
+              <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-lg);">Notre recette</h3>
+              <p style="margin-bottom: var(--space-md);">
+                Chaque pizza est préparée avec une pâte faite maison, fermentée 24h pour une texture légère et digeste.
+              </p>
+              <p style="margin-bottom: var(--space-md);">
+                Notre sauce tomate San Marzano est mijotée avec des herbes fraîches, et notre mozzarella di bufala
+                est sélectionnée auprès des meilleurs fromagers.
+              </p>
+              <p>
+                Cuites à 400°C dans un four traditionnel, nos pizzas sortent en 3 minutes avec un bord croustillant
+                doré et un cœur fondant.
+              </p>
+            </div>
+            <div class="premium-side" style="padding: var(--space-2xl);">
+              <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-lg);">Notre engagement</h3>
+              <p style="margin-bottom: var(--space-md);">
+                Nous nous engageons à utiliser uniquement des ingrédients de première qualité,
+                sourced locally lorsque c'est possible.
+              </p>
+              <p style="margin-bottom: var(--space-md);">
+                Notre équipe de livreurs professionnels assure une livraison en moins de 35 minutes,
+                avec un emballage conçu pour garder vos pizzas chaudes et savoureuses.
+              </p>
+              <p>
+                Satisfait ou remboursé : si notre pizza ne vous convient pas, nous vous remboursons
+                sans discussion.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Stats section -->
+        <section class="section">
+          <div class="grid grid-4" style="text-align: center;" data-reveal>
+            <div>
+              <div style="font-size: var(--font-size-4xl); font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">5K+</div>
+              <div style="color: var(--gray-4); margin-top: var(--space-sm);">Clients satisfaits</div>
+            </div>
+            <div>
+              <div style="font-size: var(--font-size-4xl); font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--accent)); background-clip: text; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">30+</div>
+              <div style="color: var(--gray-4); margin-top: var(--space-sm);">Produits au menu</div>
+            </div>
+            <div>
+              <div style="font-size: var(--font-size-4xl); font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--accent)); background-clip: text; -webkit-background-clip: text; color: transparent; -webkit-text-fill-color: transparent;">4.9★</div>
+              <div style="color: var(--gray-4); margin-top: var(--space-sm);">Note moyenne</div>
+            </div>
+            <div>
+              <div style="font-size: var(--font-size-4xl); font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--accent)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">25min</div>
+              <div style="color: var(--gray-4); margin-top: var(--space-sm);">Temps de livraison</div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">🍕</span>
+          <div>
+            <div class="footer-title">Pizziria Blibla</div>
+            <div class="footer-sub">Premium pizza • Food delivery moderne</div>
+          </div>
+        </div>
+        <p class="footer-text">
+          Commandez en quelques clics. Pizzas gourmandes préparées avec passion.
+        </p>
+        <div class="footer-social">
+          <a class="social-btn" href="#" aria-label="Instagram">IG</a>
+          <a class="social-btn" href="#" aria-label="Facebook">FB</a>
+          <a class="social-btn" href="#" aria-label="TikTok">TT</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">Navigation</div>
+        <div class="footer-links">
+          <a href="index.html">Accueil</a>
+          <a href="menu.html">Menu</a>
+          <a href="about.html">À propos</a>
+          <a href="contact.html">Contact</a>
+          <a href="auth.html">Login/Register</a>
+          <a href="admin.html">Admin Dashboard</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">Contact</div>
+        <div class="footer-links">
+          <span>📍 Casablanca, Maroc</span>
+          <span>☎️ +212 6XX-XX-XX-XX</span>
+          <span>✉️ contact@pizziria-blibla.ma</span>
+        </div>
+        <div style="margin-top: var(--space-md);">
+          <div class="footer-title" style="font-size: var(--font-size-sm);">Horaires</div>
+          <p class="footer-text" style="margin-top: var(--space-xs);">
+            Lun–Dim : 11h30 — 23h30
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>© <span id="year"></span> Pizziria Blibla. Tous droits réservés.</span>
+      <span class="footer-mini">Design premium • Vanilla JS</span>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/scrollReveal.js"></script>
+</body>
+</html>

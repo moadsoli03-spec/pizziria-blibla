@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizziria Blibla — Panier</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/global.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/cart.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Pizziria Blibla">
+        <span class="brand-mark" aria-hidden="true">🍕</span>
+        <span class="brand-text">
+          <span class="brand-name">Pizziria Blibla</span>
+          <span class="brand-tag">Premium Pizza • Food Delivery</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Navigation principale">
+        <a class="nav-link" href="index.html">Accueil</a>
+        <a class="nav-link" href="menu.html">Menu</a>
+        <a class="nav-link" href="about.html">À propos</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+        <a class="nav-link" href="auth.html">Connexion</a>
+        <a class="nav-link is-active nav-link-cart" href="cart.html">
+          Panier <span class="badge badge-pill" id="navCartCount">0</span>
+        </a>
+      </nav>
+
+      <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-nav-toggle>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <section class="page-hero">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <div>
+            <h1 class="page-title">Votre panier</h1>
+            <p class="page-lead">Modifiez les quantités, retirez des produits, puis passez au checkout.</p>
+          </div>
+          <div>
+            <a class="btn btn-ghost" href="menu.html">Continuer le shopping</a>
+          </div>
+        </div>
+
+        <div class="split">
+          <div>
+            <!-- Cart items -->
+            <div id="cartList" class="cart-list" data-reveal>
+              <!-- Injected by js/cart.js -->
+            </div>
+
+            <!-- Empty state -->
+            <div id="cartEmpty" class="empty-state" style="display:none" data-reveal>
+              <div class="empty-state-icon">🛒</div>
+              <div class="empty-state-title">Votre panier est vide</div>
+              <p class="empty-state-text">
+                Ajoutez des produits depuis notre menu pour commencer.
+              </p>
+              <a class="btn btn-primary" href="menu.html">Voir le menu</a>
+            </div>
+          </div>
+
+          <!-- Summary -->
+          <aside class="summary" data-reveal>
+            <h2 class="section-title" style="font-size:22px;margin:0 0 var(--space-lg);">Récapitulatif</h2>
+
+            <div class="summary-row">
+              <span>Articles</span>
+              <span id="cartItemsLabel" style="color:rgba(255,255,255,.72)">0 article(s)</span>
+            </div>
+
+            <div class="summary-row">
+              <span>Livraison</span>
+              <span style="color:#00cc88">Gratuite</span>
+            </div>
+
+            <div class="summary-row" style="padding-bottom: var(--space-md);" aria-hidden="true">
+              <span style="color: rgba(255,255,255,0.0)">divider</span>
+              <span style="color: rgba(255,255,255,0.0)">divider</span>
+            </div>
+
+
+            <!-- Promo / Totaux -->
+            <div class="promo-card" style="margin-top: var(--space-lg);">
+              <div class="promo-title" style="display:flex; align-items:center; justify-content:space-between; gap: var(--space-md);">
+                <span>Code promo</span>
+                <span id="appliedPromoBadge" class="badge badge-promo" style="display:none;"></span>
+              </div>
+
+              <div style="margin-top: var(--space-md); display:flex; gap: var(--space-md); flex-wrap: wrap;">
+                <input
+                  class="field"
+                  style="flex: 1 1 200px; min-width: 200px;"
+                  id="promoCodeInput"
+                  type="text"
+                  placeholder="Entrer un code promo"
+                  autocomplete="off"
+                />
+
+                <button class="btn btn-primary" type="button" id="applyPromoBtn">Appliquer</button>
+                <button class="btn btn-ghost" type="button" id="removePromoBtn" style="display:none;">Retirer</button>
+              </div>
+
+              <!-- Dynamic savings row (frontend only) -->
+              <div id="promoSavingsRow" style="margin-top: var(--space-sm); display:none;">
+                <span id="promoSavingsText" style="color: var(--success); font-weight: 900; font-size: var(--font-size-sm);"></span>
+              </div>
+
+              <div id="promoMessage" style="margin-top: var(--space-sm); color: var(--gray-3); font-size: var(--font-size-sm);"></div>
+            </div>
+
+
+            <div class="summary-row" style="margin-top: var(--space-lg);">
+              <span>Articles</span>
+              <span id="cartSubtotal">0 DH</span>
+            </div>
+
+            <div class="summary-row" id="discountRow" style="display:none;">
+              <span>Remise</span>
+              <span style="color: var(--success); font-weight: 800;" id="cartDiscount">-0 DH</span>
+            </div>
+
+            <div class="summary-total">
+              <div class="total-label">Total</div>
+              <div class="total-value" id="cartTotal">0 DH</div>
+            </div>
+
+
+            <div style="margin-top: var(--space-lg); display:flex; flex-direction: column; gap: var(--space-md);">
+              <button class="btn btn-primary btn-lg btn-block" type="button" id="checkoutBtn">
+                Commander
+                <span class="btn-icon" aria-hidden="true">→</span>
+              </button>
+              <button class="btn btn-ghost btn-lg btn-block" type="button" id="clearCartBtn">
+                Vider le panier
+              </button>
+            </div>
+
+            <div class="note" style="margin-top: var(--space-lg); text-align: center;">
+              💳 Paiement à la livraison<br>
+              mock UI — frontend uniquement
+            </div>
+
+            <!-- Trust badges -->
+            <div style="margin-top: var(--space-xl); padding-top: var(--space-lg); border-top: 1px solid rgba(255,255,255,0.05);">
+              <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                  <div style="font-size: 1.5rem;">🚚</div>
+                  <div style="font-size: var(--font-size-xs); color: var(--gray-4); margin-top: var(--space-xs);">Livraison rapide</div>
+                </div>
+                <div style="text-align: center;">
+                  <div style="font-size: 1.5rem;">🔒</div>
+                  <div style="font-size: var(--font-size-xs); color: var(--gray-4); margin-top: var(--space-xs);">Paiement sécurisé</div>
+                </div>
+                <div style="text-align: center;">
+                  <div style="font-size: 1.5rem;">⭐</div>
+                  <div style="font-size: var(--font-size-xs); color: var(--gray-4); margin-top: var(--space-xs);">Qualité garantie</div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">🍕</span>
+          <div>
+            <div class="footer-title">Pizziria Blibla</div>
+            <div class="footer-sub">Premium pizza • Food delivery moderne</div>
+          </div>
+        </div>
+        <p class="footer-text">
+          Commandez en quelques clics. Pizzas gourmandes préparées avec passion.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">Navigation</div>
+        <div class="footer-links">
+          <a href="index.html">Accueil</a>
+          <a href="menu.html">Menu</a>
+          <a href="about.html">À propos</a>
+          <a href="contact.html">Contact</a>
+          <a href="auth.html">Login/Register</a>
+          <a href="admin.html">Admin Dashboard</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">Contact</div>
+        <div class="footer-links">
+          <span>📍 Casablanca, Maroc</span>
+          <span>☎️ +212 6XX-XX-XX-XX</span>
+          <span>✉️ contact@pizziria-blibla.ma</span>
+        </div>
+        <div class="footer-social">
+          <a class="social-btn" href="#" aria-label="Instagram">IG</a>
+          <a class="social-btn" href="#" aria-label="Facebook">FB</a>
+          <a class="social-btn" href="#" aria-label="TikTok">TT</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>© <span id="year"></span> Pizziria Blibla. Tous droits réservés.</span>
+      <span class="footer-mini">Design premium • Vanilla JS</span>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/scrollReveal.js"></script>
+  <script src="js/pdfInvoice.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>
