@@ -36,3 +36,12 @@ Thumbs.db
 # Optional: package managers caches
 .cache/
 
+# Fichiers internes (conservés en local, pas versionnés)
+TODO.md
+TODO_FRONTEND_ONLY_REBUILD.md
+html_cleanup_plan.md
+admin
+js/_frontend_only_cart_v1_ref.txt
+js/_frontend_only_cart_v2_impl.txt
+
+
